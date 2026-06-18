@@ -8,8 +8,7 @@ class Solution {
         }else{
             hourHand = hour*30 + minutes*0.500000;
         }
-        double ans = hourHand - minHand;
-        if(ans < 0) ans = ans*(-1);
+        double ans = Math.abs(hourHand - minHand);
         return (ans <= 180.0) ? ans : (360.0 - ans);
     }
 }
