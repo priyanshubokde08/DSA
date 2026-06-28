@@ -1,12 +1,12 @@
 class Solution {
-    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
-        Arrays.sort(arr);
-        int count = 1;
-        arr[0] = 1;
-        for(int i = 1; i < arr.length; i++){
-            if(arr[i] != arr[i - 1]) count++;
-            arr[i] = Math.min(arr[i], arr[i - 1] + 1);
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr){
+        int n = arr.length;
+        int freq[] = new int[n + 1];
+        for(int x : arr) freq[Math.min(x, n)]++;
+        int ans = 0;
+        for(int i = 1; i <=n; i++){
+            ans = Math.min(i, ans + freq[i]);
         }
-        return count;
+        return ans;
     }
 }
