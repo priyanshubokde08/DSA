@@ -1,12 +1,12 @@
 class Solution {
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
         Arrays.sort(arr);
+        int count = 1;
         arr[0] = 1;
-        int max = arr[0];
         for(int i = 1; i < arr.length; i++){
-            if(Math.abs(arr[i] - arr[i - 1]) > 1) arr[i] = arr[i - 1] + 1;
-            max = Math.max(max, arr[i]);
+            if(arr[i] != arr[i - 1]) count++;
+            arr[i] = Math.min(arr[i], arr[i - 1] + 1);
         }
-        return max;
+        return count;
     }
 }
