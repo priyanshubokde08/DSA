@@ -14,12 +14,11 @@ class Solution {
         for(int i = 0; i < m; i++){
             if(wst[i] <= min1){
                 min2 = Math.min(min2, wd[i]);
-            }else if(wst[i] > min1){
+            }else{ // wst[i] > min1
                 min2 = Math.min(min2, wst[i] - min1 + wd[i]);
             }
         }
-        if(min2 == Integer.MAX_VALUE) part1 = Integer.MAX_VALUE;
-        else part1 = min1 + min2;
+        part1 = min1 + min2;
 
         int part2 = 0; // water then land
 
@@ -31,12 +30,11 @@ class Solution {
         for(int i = 0; i < n; i++){
             if(lst[i] <= min3){
                 min4 = Math.min(min4, ld[i]);
-            }else if(lst[i] > min3){
+            }else{ // lst[i] > min3
                 min4 = Math.min(min4, lst[i] - min3 + ld[i]);
             }
         }
-        if(min4 == Integer.MAX_VALUE) part2 = Integer.MAX_VALUE;
-        else part2 = min3 + min4;
+        part2 = min3 + min4;
 
         return Math.min(part1, part2);
     }
