@@ -1,8 +1,9 @@
 class Solution {
   
     public int nextGreaterElement(int n) {
-        if(n >= Integer.MAX_VALUE) return -1;
+         
         char[] arr = String.valueOf(n).toCharArray();
+
         // Find pivot
         int i = arr.length - 2;
         for(; i >= 0; i--){
@@ -14,6 +15,7 @@ class Solution {
         while (arr[j] <= arr[i]) {
             j--;
         }
+
         // Swap
         char temp = arr[j];
         arr[j] = arr[i];
@@ -28,11 +30,13 @@ class Solution {
             j++;
             last--;
         }
+
         long num = 0 ;
         for(int k = 0; k < arr.length; k++){
             num = num * 10 + arr[k] - '0';
         }
         if (num > Integer.MAX_VALUE) return -1;
+        
         return (int) num;
     }
 }
