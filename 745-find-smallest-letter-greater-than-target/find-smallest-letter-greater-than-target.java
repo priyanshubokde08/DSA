@@ -1,8 +1,11 @@
 class Solution {
-    public char nextGreatestLetter(char[] letters, char target) {
-        for(char ch : letters){
-            if((ch - 'a') > (target - 'a')) return ch;
+    public char nextGreatestLetter(char[] let, char t) {
+        int n = let.length; int left = 0; int right = n - 1;
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+            if(let[mid] > t) right = mid - 1;
+            else left = mid + 1;
         }
-        return letters[0];
+        return let[left % n];
     }
 }
