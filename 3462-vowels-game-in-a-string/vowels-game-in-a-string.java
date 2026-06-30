@@ -1,14 +1,9 @@
 class Solution {
     public boolean doesAliceWin(String s) {
-        int count = 0;
-        Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        int k = 0;
         for(char ch : s.toCharArray()){
-            if(set.contains(ch)) count++;
+            if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') k++;
         }
-        if(count == 0) return false;
-        else if(count % 2 == 1) return true;
-        else{
-            return true;
-        }
+        return k != 0;
     }
 }
