@@ -1,7 +1,11 @@
 class Solution {
     public int maxDistinct(String s) {
-        Set<Character> set = new HashSet<>();
-        for(char c : s.toCharArray()) set.add(c);
-        return set.size();
+        int present[] = new int[26];
+        int count = 0;
+        for(char c : s.toCharArray()){
+            present[c - 'a']++;
+            if(present[c - 'a'] == 1) count++; 
+        }
+        return count;
     }
 }
