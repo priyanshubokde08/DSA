@@ -1,17 +1,19 @@
 class Solution {
     public int kthSmallest(int[][] mat, int k) {
         int m = mat.length; int n = mat[0].length;
+        int low = mat[0][0]; int high = mat[m - 1][n -1];
 
-        int arr[] = new int[m*n];
-
-        int r = 0;
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                arr[r] = mat[i][j];
-                r++;
-            }
+        while(low < high){
+            int count = 0;
+            int mid = low + (high - low) / 2;
+                for(int i = 0; i < m; i++){
+                    int j = n - 1;
+                    while(j >= 0 && mat[i][j] > mid) j--;
+                    count += (j + 1);
+                }
+            if(count < k) low = mid + 1;
+            else high = mid;
         }
-        Arrays.sort(arr);
-        return arr[k - 1];
+        return low;
     }
 }
