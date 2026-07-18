@@ -11,28 +11,17 @@ class Solution {
         // return ans;
 
         int n = h.length;
-
+        int max = 0;
         Stack<Integer> st = new Stack<>();
-        int nse[] = new int[n];
-        for(int i = n-1; i >= 0; i--){
-            while(!st.empty() && h[st.peek()] >= h[i]) st.pop();
-            nse[i] = st.empty() ? n : st.peek();
-            st.push(i);
+        for(int i = 0; i <= n; i++){
+            int currhigh = (i == n) ? 0 : h[i];
+            while(!st.empty() && currhigh < h[st.peek()]){
+                int high = h[st.pop()];
+                int wid = st.empty() ? i : i - st.peek() - 1;
+                max = Math.max(max, wid*high);
+            }
+                st.push(i);
         }
-        while(!st.empty()) st.pop();
-
-        int pse[] = new int[n];
-        for(int i = 0; i < n; i++){
-            while(!st.empty() && h[st.peek()] > h[i]) st.pop();
-            pse[i] = st.empty() ? -1 : st.peek();
-            st.push(i);
-        }
-
-        int ans = 0;
-        for(int i = 0; i < n; i++){
-            int wid = nse[i] - pse[i] - 1;
-            ans = Math.max(ans, h[i]*wid);
-        }
-        return ans;
+        return max;
     }
 }
