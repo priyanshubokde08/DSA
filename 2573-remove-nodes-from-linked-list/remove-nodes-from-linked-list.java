@@ -9,22 +9,33 @@
  * }
  */
 class Solution {
+    static ListNode reverse(ListNode head){
+        if(head == null || head.next == null) return head;
+        ListNode curr = head;
+        ListNode prev = null;
+        while(curr != null){
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
     public ListNode removeNodes(ListNode head) {
-        Stack<Integer> st = new Stack<>();
+        head = reverse(head);
         ListNode temp = head;
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        int max = head.val;
+
         while(temp != null){
-            while(!st.empty() && temp.val > st.peek()){
-                st.pop();
+            if(temp.val >= max){
+                curr.next = new ListNode(temp.val);
+                curr = curr.next;
+                max = temp.val;
             }
-            st.push(temp.val);
             temp = temp.next;
         }
-        ListNode curr = head;
-        for(int i = 0; i < st.size(); i++){
-            curr.next = new ListNode(st.get(i));
-            curr = curr.next;
-            if(i == st.size() - 1) curr.next = null;
-        }
-        return head.next;
+        return reverse(dummy.next);
     }
 }
