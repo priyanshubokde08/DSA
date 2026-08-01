@@ -19,12 +19,12 @@ class Solution {
             st.push(temp.val);
             temp = temp.next;
         }
-        ListNode ans = new ListNode(0);
-        ListNode curr = ans;
+        ListNode curr = head;
         for(int i = 0; i < st.size(); i++){
             curr.next = new ListNode(st.get(i));
             curr = curr.next;
+            if(i == st.size() - 1) curr.next = null;
         }
-        return ans.next;
+        return head.next;
     }
 }
