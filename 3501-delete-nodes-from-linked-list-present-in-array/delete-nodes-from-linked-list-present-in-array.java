@@ -23,18 +23,16 @@ class Solution {
     public ListNode modifiedList(int[] nums, ListNode head){
     Arrays.sort(nums);
     ListNode dummy = new ListNode(0);
-    dummy.next = head;
-
-    ListNode prev = dummy;
-    ListNode curr = head;
-    while(curr != null){
-        if(search(nums, curr.val)){
-            prev.next = curr.next; // a temporary currnt node
-        }else{
-            prev = curr;
+    ListNode curr = dummy;
+    ListNode temp = head;
+    while(temp != null){
+        if(!search(nums, temp.val)){
+            curr.next = temp;
+            curr = curr.next;
         }
-        curr = curr.next;
+        temp = temp.next;
     }
+    curr.next = null;
     return dummy.next;
     }
 }
