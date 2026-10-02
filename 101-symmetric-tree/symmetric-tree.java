@@ -14,18 +14,36 @@
  * }
  */
 class Solution {
-    public boolean isSymmetric(TreeNode p, TreeNode q) {
-        if (p == null && q == null) return true;
+    public void preorder(TreeNode root, List<String> ans){
+        if(root == null) {
+            ans.add("null");
+            return;
+        }
+        ans.add(String.valueOf(root.val));
+        preorder(root.left, ans);
+        preorder(root.right, ans);
+    }
+    //Use mirror traversal because the right subtree must be compared in the opposite direction to the left subtree
+    public void mirrorPreorder(TreeNode root, List<String> ans) {
+        if(root == null) {
+            ans.add("null");
+            return;
+        }
 
-        if (p == null || q == null) return false;
-
-        if (p.val != q.val) return false;
-
-        return isSymmetric(p.left, q.right) &&
-               isSymmetric(p.right, q.left);
+        ans.add(String.valueOf(root.val));
+        mirrorPreorder(root.right, ans);
+        mirrorPreorder(root.left, ans);
     }
     public boolean isSymmetric(TreeNode root) {
-        if (root == null) return true;
-        return isSymmetric(root.left, root.right);
+        List<String> l1 = new ArrayList<>();
+        List<String> l2 = new ArrayList<>();
+
+        preorder(root.left, l1);
+        mirrorPreorder(root.right, l2);
+
+        for(int i = 0 ; i < l1.size(); i++){
+            if(!l1.get(i).equals(l2.get(i))) return false;
+        }
+        return true;
     }
 }
