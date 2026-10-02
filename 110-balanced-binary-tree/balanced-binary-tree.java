@@ -22,7 +22,8 @@ class Solution {
         int lh = height(root.left);
         int rh = height(root.right);
 
-        if(Math.abs(lh - rh) > 1){ ans = false; return 0; }
+        if(Math.abs(lh - rh) > 1){ ans = false;}
+        if(!ans) return 0; // it will stop immediately after getting false
 
         return 1 + Math.max(lh, rh);
         
