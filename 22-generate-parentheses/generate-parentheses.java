@@ -17,5 +17,6 @@ class Solution {
         if(close < open){ // count of open brack should be grater than close, only when we can use close one
             generate(ans, curr + ")", open, close+1, n);
         }
+        //it automatically backtrack to get all possibility
     }
 }
